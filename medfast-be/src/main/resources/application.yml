@@ -1,0 +1,106 @@
+spring:
+
+  application:
+    name: medfast
+
+  # DB Properties
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/medfast}
+    username: ${DB_USERNAME:user}
+    password: ${DB_PASSWORD:secret}
+
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:dev} # Default profile; change to prod as needed
+
+  liquibase:
+    enabled: true
+    clear-checksums: true
+
+  # Mail Configuration
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: healflow.automation@gmail.com
+    password: ${MAIL_PASSWORD:pass}
+    max-retries: 3
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            required: true
+            enable: true
+
+  # Files sent via http
+  servlet:
+    multipart:
+      max-file-size: 50MB
+
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+
+support:
+  phone-number: ${PHONE_NUMBER:+1 (123) 348-2626}
+
+# JWT
+token:
+  timeout:
+    access: 3600
+    refresh: 7200
+    reset-password: 60
+  signing:
+    key: 0e3d01d7c4f45a1e8df9c5d0937a0e295dfd42d15268b8ac7bf1ff66513c3ea6
+
+workday:
+  start-time: "08:00"
+  end-time: "17:00"
+
+# Verification code
+verification:
+  code:
+    timeout: 86400
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+        mail: DEBUG
+        web: DEBUG
+        jdbc:
+          core: DEBUG
+          transaction: DEBUG
+        orm: DEBUG
+        hibernate:
+          SQL: DEBUG
+          type: DEBUG
+    web: DEBUG
+    liquibase: DEBUG
+
+server:
+  error:
+    include-stacktrace: never
+
+temporary-password-validity-days: 1
+element-count-limit: ${ELEMENT_COUNT_LIMIT:3}
+
+profile:
+  default-profile-picture-path: "classpath:/static/images/profile/default-profile-picture.png"
+
+# Base URL
+base-url: http://localhost:3000
+
+# File storage path
+file:
+  storage:
+    location:
+      base-directory: ./uploads
+
+# Google Meet link
+google:
+  meet:
+    link: https://meet.google.com/uin-ccsm-pgv

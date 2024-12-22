@@ -1,0 +1,23 @@
+{
+  "doctors": [
+    { "name": "Philip", "surname": "Wiser", "speciality": "Allergologist", "imageUrl": null },
+    {
+      "name": "John",
+      "surname": "Smith",
+      "speciality": "General practitioner",
+      "imageUrl": null
+    },
+    {
+      "name": "Amanda",
+      "surname": "Brown",
+      "speciality": "Endocrinologist",
+      "imageUrl": null
+    },
+    {
+      "name": "Sarah",
+      "surname": "Miller",
+      "speciality": "General practitioner",
+      "imageUrl": null
+    }
+  ]
+}

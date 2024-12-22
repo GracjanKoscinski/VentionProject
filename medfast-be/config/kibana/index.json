@@ -1,0 +1,6 @@
+{
+  "index_pattern": {
+    "title": "spring-boot-*",
+    "timeFieldName": "@timestamp"
+  }
+}

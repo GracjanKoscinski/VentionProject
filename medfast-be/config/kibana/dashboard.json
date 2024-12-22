@@ -1,0 +1,64 @@
+{
+  "version": "7.17.23",
+  "objects": [
+    {
+      "id": "52f95be0-5590-11ef-9788-47d62b2cc642",
+      "type": "dashboard",
+      "namespaces": [
+        "default"
+      ],
+      "updated_at": "2024-08-08T14:37:17.551Z",
+      "version": "WzYwLDFd",
+      "attributes": {
+        "title": "Visual Data",
+        "hits": 0,
+        "description": "",
+        "panelsJSON": "[{\"version\":\"7.17.23\",\"type\":\"lens\",\"gridData\":{\"x\":0,\"y\":0,\"w\":48,\"h\":19,\"i\":\"20add2d1-332f-4738-adb7-aa8ce470618d\"},\"panelIndex\":\"20add2d1-332f-4738-adb7-aa8ce470618d\",\"embeddableConfig\":{\"attributes\":{\"title\":\"\",\"visualizationType\":\"lnsDatatable\",\"type\":\"lens\",\"references\":[{\"type\":\"index-pattern\",\"id\":\"dab1ff30-558e-11ef-9788-47d62b2cc642\",\"name\":\"indexpattern-datasource-current-indexpattern\"},{\"type\":\"index-pattern\",\"id\":\"dab1ff30-558e-11ef-9788-47d62b2cc642\",\"name\":\"indexpattern-datasource-layer-00f12b6b-c4b2-457e-b074-ecabb21b71d9\"}],\"state\":{\"visualization\":{\"layerId\":\"00f12b6b-c4b2-457e-b074-ecabb21b71d9\",\"layerType\":\"data\",\"columns\":[{\"isTransposed\":false,\"columnId\":\"a2d106fb-8a65-40ad-92e6-5d4fe566ddd2\",\"alignment\":\"left\",\"width\":188.02499999999998},{\"columnId\":\"f511c849-e7bb-4113-9924-8a516496930d\",\"isTransposed\":false},{\"columnId\":\"feb93da0-312d-474d-b7bb-8f60c6269cdf\",\"isTransposed\":false,\"width\":305.35},{\"columnId\":\"9b542069-fe86-400b-9f72-55806a98144a\",\"isTransposed\":false,\"width\":482.6},{\"columnId\":\"5f0b1bf1-4455-4a81-b03d-7bd8fbd4fd95\",\"isTransposed\":false,\"hidden\":true}],\"sorting\":{\"columnId\":\"a2d106fb-8a65-40ad-92e6-5d4fe566ddd2\",\"direction\":\"desc\"}},\"query\":{\"query\":\"\",\"language\":\"lucene\"},\"filters\":[],\"datasourceStates\":{\"indexpattern\":{\"layers\":{\"00f12b6b-c4b2-457e-b074-ecabb21b71d9\":{\"columns\":{\"a2d106fb-8a65-40ad-92e6-5d4fe566ddd2\":{\"label\":\"Time\",\"dataType\":\"date\",\"operationType\":\"date_histogram\",\"sourceField\":\"@timestamp\",\"isBucketed\":true,\"scale\":\"interval\",\"params\":{\"interval\":\"auto\"},\"customLabel\":true},\"f511c849-e7bb-4113-9924-8a516496930d\":{\"label\":\"Level\",\"dataType\":\"string\",\"operationType\":\"terms\",\"scale\":\"ordinal\",\"sourceField\":\"level.keyword\",\"isBucketed\":true,\"params\":{\"size\":3,\"orderBy\":{\"type\":\"column\",\"columnId\":\"5f0b1bf1-4455-4a81-b03d-7bd8fbd4fd95\"},\"orderDirection\":\"desc\",\"otherBucket\":true,\"missingBucket\":false},\"customLabel\":true},\"feb93da0-312d-474d-b7bb-8f60c6269cdf\":{\"label\":\"Logging Class\",\"dataType\":\"string\",\"operationType\":\"terms\",\"scale\":\"ordinal\",\"sourceField\":\"loggerName.keyword\",\"isBucketed\":true,\"params\":{\"size\":3,\"orderBy\":{\"type\":\"column\",\"columnId\":\"5f0b1bf1-4455-4a81-b03d-7bd8fbd4fd95\"},\"orderDirection\":\"desc\",\"otherBucket\":true,\"missingBucket\":false},\"customLabel\":true},\"9b542069-fe86-400b-9f72-55806a98144a\":{\"label\":\"Message\",\"dataType\":\"string\",\"operationType\":\"terms\",\"scale\":\"ordinal\",\"sourceField\":\"message.keyword\",\"isBucketed\":true,\"params\":{\"size\":3,\"orderBy\":{\"type\":\"column\",\"columnId\":\"5f0b1bf1-4455-4a81-b03d-7bd8fbd4fd95\"},\"orderDirection\":\"desc\",\"otherBucket\":true,\"missingBucket\":false},\"customLabel\":true},\"5f0b1bf1-4455-4a81-b03d-7bd8fbd4fd95\":{\"label\":\"Count of records\",\"dataType\":\"number\",\"operationType\":\"count\",\"isBucketed\":false,\"scale\":\"ratio\",\"sourceField\":\"Records\"}},\"columnOrder\":[\"a2d106fb-8a65-40ad-92e6-5d4fe566ddd2\",\"f511c849-e7bb-4113-9924-8a516496930d\",\"feb93da0-312d-474d-b7bb-8f60c6269cdf\",\"9b542069-fe86-400b-9f72-55806a98144a\",\"5f0b1bf1-4455-4a81-b03d-7bd8fbd4fd95\"],\"incompleteColumns\":{}}}}}}},\"enhancements\":{},\"hidePanelTitles\":false},\"title\":\"Visual Data\"}]",
+        "optionsJSON": "{\"useMargins\":true,\"syncColors\":false,\"hidePanelTitles\":false}",
+        "version": 1,
+        "timeRestore": false,
+        "kibanaSavedObjectMeta": {
+          "searchSourceJSON": "{\"query\":{\"query\":\"\",\"language\":\"kuery\"},\"filter\":[]}"
+        }
+      },
+      "references": [
+        {
+          "type": "index-pattern",
+          "id": "dab1ff30-558e-11ef-9788-47d62b2cc642",
+          "name": "20add2d1-332f-4738-adb7-aa8ce470618d:indexpattern-datasource-current-indexpattern"
+        },
+        {
+          "type": "index-pattern",
+          "id": "dab1ff30-558e-11ef-9788-47d62b2cc642",
+          "name": "20add2d1-332f-4738-adb7-aa8ce470618d:indexpattern-datasource-layer-00f12b6b-c4b2-457e-b074-ecabb21b71d9"
+        }
+      ],
+      "migrationVersion": {
+        "dashboard": "7.17.3"
+      },
+      "coreMigrationVersion": "7.17.23"
+    },
+    {
+      "id": "dab1ff30-558e-11ef-9788-47d62b2cc642",
+      "type": "index-pattern",
+      "namespaces": [
+        "default"
+      ],
+      "updated_at": "2024-08-08T14:35:58.484Z",
+      "version": "WzMwLDFd",
+      "attributes": {
+        "fieldAttrs": "{\"level\":{\"count\":1},\"loggerName\":{\"count\":1},\"message\":{\"count\":1}}",
+        "title": "spring-boot-*",
+        "timeFieldName": "@timestamp",
+        "fields": "[]",
+        "typeMeta": "{}",
+        "runtimeFieldMap": "{}"
+      },
+      "references": [],
+      "migrationVersion": {
+        "index-pattern": "7.11.0"
+      },
+      "coreMigrationVersion": "7.17.23"
+    }
+  ]
+}

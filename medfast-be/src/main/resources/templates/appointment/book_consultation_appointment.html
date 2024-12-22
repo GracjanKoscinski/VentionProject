@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Password Reset</title>
+  <style>
+    body {
+      font-family: Aarial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      background-color: #f4f4f4;
+      color: #333333;
+    }
+
+    .container {
+      padding: 30px 30px 60px;
+      position: relative;
+      background-image: url('cid:watermark');
+      background-repeat: no-repeat;
+      background-position: 95% 50%;
+      background-size: 100px;
+      margin: auto;
+      max-width: 600px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      text-align: left;
+      margin-bottom: 20px;
+    }
+
+    .logo img {
+      width: 70px;
+    }
+
+    h2 {
+      font-weight: bold;
+    }
+
+    .separator {
+      border-top: 2px solid #ffb84d;
+      width: 30%;
+      margin: 20px 0;
+    }
+
+    .info-text {
+      font-style: italic;
+      font-size: 12px;
+      color: #888;
+      margin-bottom: 30px;
+    }
+
+    .footer {
+      font-size: 0.9em;
+      color: #fff;
+      background: linear-gradient(0deg, #1D1A9833, #7A77FF);
+      border-radius: 0 0 10px 10px;
+      padding: 10px;
+      margin-top: 20px;
+      text-align: center;
+      font-style: italic;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="logo">
+    <img th:src="@{cid:logo}"
+         alt="Medfast Logo">
+  </div>
+  <h2>Your appointment was booked</h2>
+  <div>
+    <div>Good afternoon!</div>
+    <div>
+      We inform you about the booked visit to the
+      <br>
+      <span th:text="${doctor}"></span> on <span th:text="${dateTime}"></span>
+      <span th:text="${location}"></span>.
+    </div>
+  </div>
+  <div class="separator"></div>
+  <div class="info-text">If you did not sign up for this account you can ignore this email</div>
+  <div class="footer">
+    Problems or questions? Call us <span th:text="${supportPhone}"></span><br>
+    or email <span th:text="${supportMailbox}"></span>
+  </div>
+</div>
+</body>
+</html>

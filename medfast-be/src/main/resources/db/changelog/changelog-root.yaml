@@ -1,0 +1,16 @@
+databaseChangeLog:
+  - include:
+      file: /db/changelog/changelog-table.postgresql.sql
+      context: dev, prod
+
+  - include:
+      file: /db/changelog/changelog-index.postgresql.sql
+      context: dev, prod
+
+  - include:
+      file: /db/changelog/changelog-data.postgresql.dev.sql
+      context: dev
+
+  - include:
+      file: /db/changelog/changelog-data.postgresql.prod.sql
+      context: prod

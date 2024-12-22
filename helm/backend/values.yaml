@@ -1,0 +1,23 @@
+name: medfast-backend
+replicaCount: 1
+
+image:
+  repository: medfastcr.azurecr.io/medfast-backend
+  tag: latest
+  pullPolicy: Always
+
+service:
+  port: 8080
+  targetPort: 8080
+
+config:
+  serverPort: "8080"
+  SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres-medfast.postgres.database.azure.com:5432/medfast?sslmode=require"
+  SPRING_DATASOURCE_USERNAME: "user"
+  SPRING_DATASOURCE_PASSWORD: "secret123!"
+  mailPassword: "pyne podv rskn cqof"
+  SPRING_PROFILES_ACTIVE: "dev"
+
+ingress:
+  className: nginx
+  enabled: true

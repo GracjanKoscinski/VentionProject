@@ -1,0 +1,43 @@
+{
+  "services": [
+    { "id": 1, "name": "Allergist's consultation ", "duration": 90 },
+    { "id": 2, "name": "Allergist's consultation ", "duration": 45 },
+    {
+      "id": 3,
+      "name": "Allergy testing by blood: a blood test to determine the amount of immunoglobulin",
+      "duration": 60
+    },
+
+    { "id": 4, "name": "Allergist's consultation", "duration": 60 },
+    { "id": 5, "name": "Allergist's consultation", "duration": 90 },
+    {
+      "id": 6,
+      "name": "Allergy testing by blood: a blood test to determine the amount of immunoglobulin",
+      "duration": 15
+    },
+
+    { "id": 7, "name": "Allergist's consultation", "duration": 15 },
+    { "id": 8, "name": "Allergist's consultation", "duration": 60 },
+    {
+      "id": 9,
+      "name": "Allergy testing by blood: a blood test to determine the amount of immunoglobulin",
+      "duration": 20
+    },
+
+    { "id": 10, "name": "Allergist's consultation", "duration": 45 },
+    { "id": 11, "name": "Allergist's consultation", "duration": 60 },
+    {
+      "id": 12,
+      "name": "Allergy testing by blood: a blood test to determine the amount of immunoglobulin",
+      "duration": 20
+    },
+
+    { "id": 13, "name": "Allergist's consultation", "duration": 45 },
+    { "id": 14, "name": "Allergist's consultation", "duration": 90 },
+    {
+      "id": 15,
+      "name": "Allergy testing by blood: a blood test to determine the amount of immunoglobulin",
+      "duration": 15
+    }
+  ]
+}

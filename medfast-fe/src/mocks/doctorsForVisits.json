@@ -1,0 +1,33 @@
+{
+  "doctors": [
+    {
+      "id": 1,
+      "name": "Philip",
+      "surname": "Wiser",
+      "specializations": ["Allergologist"],
+      "imageUrl": null,
+      "availableSlots": 2
+    },
+    {
+      "id": 2,
+      "name": "John Smith",
+      "specializations": ["General practitioner"],
+      "imageUrl": null,
+      "availableSlots": 2
+    },
+    {
+      "id": 3,
+      "name": "Amanda Brown",
+      "specializations": ["Endocrinologist"],
+      "imageUrl": null,
+      "availableSlots": 2
+    },
+    {
+      "id": 4,
+      "name": "Sarah Miller",
+      "specializations": ["General practitioner", "Endocrinologist"],
+      "imageUrl": null,
+      "availableSlots": 2
+    }
+  ]
+}

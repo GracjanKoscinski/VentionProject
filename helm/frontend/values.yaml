@@ -1,0 +1,15 @@
+name: medfast-frontend
+replicaCount: 1
+
+image:
+  repository: medfastcr.azurecr.io/medfast-frontend
+  tag: latest
+  pullPolicy: Always
+
+service:
+  port: 80
+  targetPort: 80
+
+ingress:
+  className: nginx
+  enabled: true

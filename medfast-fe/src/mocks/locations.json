@@ -1,0 +1,65 @@
+{
+    "locations": [
+      {
+        "id": 1,
+        "hospital_name": "Johns Hopkins Hospital",
+        "street_address": "1800 Orleans St",
+        "house": "Building A"
+      },
+      {
+        "id": 2,
+        "hospital_name": "Mayo Clinic",
+        "street_address": "200 First St SW",
+        "house": "Suite 101"
+      },
+      {
+        "id": 3,
+        "hospital_name": "Cleveland Clinic",
+        "street_address": "9500 Euclid Ave",
+        "house": "Main Tower"
+      },
+      {
+        "id": 4,
+        "hospital_name": "Massachusetts General Hospital",
+        "street_address": "55 Fruit St",
+        "house": "Building B"
+      },
+      {
+        "id": 5,
+        "hospital_name": "UCLA Medical Center",
+        "street_address": "757 Westwood Plaza",
+        "house": "West Wing"
+      },
+      {
+        "id": 6,
+        "hospital_name": "NewYork-Presbyterian Hospital",
+        "street_address": "622 W 168th St",
+        "house": "North Building"
+      },
+      {
+        "id": 7,
+        "hospital_name": "UCSF Medical Center",
+        "street_address": "505 Parnassus Ave",
+        "house": "South Tower"
+      },
+      {
+        "id": 8,
+        "hospital_name": "Northwestern Memorial Hospital",
+        "street_address": "251 E Huron St",
+        "house": "Main Pavilion"
+      },
+      {
+        "id": 9,
+        "hospital_name": "Cedars-Sinai Medical Center",
+        "street_address": "8700 Beverly Blvd",
+        "house": "East Wing"
+      },
+      {
+        "id": 10,
+        "hospital_name": "Duke University Hospital",
+        "street_address": "2301 Erwin Rd",
+        "house": "Building C"
+      }
+    ]
+  }
+  

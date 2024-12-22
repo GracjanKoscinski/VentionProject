@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "{{ .Release.Name }}-backend-config"
+data:
+  SERVER_PORT: {{ .Values.config.serverPort | quote }}
+  SPRING_DATASOURCE_URL: {{ .Values.config.SPRING_DATASOURCE_URL | quote }}
+  SPRING_DATASOURCE_USERNAME: {{ .Values.config.SPRING_DATASOURCE_USERNAME | quote }}
+  SPRING_DATASOURCE_PASSWORD: {{ .Values.config.SPRING_DATASOURCE_PASSWORD | quote }}
+  MAIL_PASSWORD: {{ .Values.config.mailPassword | quote }}
+  SPRING_PROFILES_ACTIVE: {{ .Values.config.SPRING_PROFILES_ACTIVE | quote }}

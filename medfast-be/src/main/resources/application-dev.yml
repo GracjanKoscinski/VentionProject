@@ -1,0 +1,5 @@
+spring:
+  liquibase:
+    change-log: db/changelog/changelog-root.yaml
+    contexts: dev
+    dropFirst: true

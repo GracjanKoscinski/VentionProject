@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+  <Properties>
+    <Property name="defaultPattern">
+      [%highlight{%-5level}] %d{DEFAULT} %c{1}.%M() - %msg%n%throwable{short.lineNumber}
+    </Property>
+  </Properties>
+  <Appenders>
+    <Console name="console" target="SYSTEM_OUT">
+      <PatternLayout pattern="${defaultPattern}"/>
+    </Console>
+    <Socket name="socket" host="${sys:logstash.host.name:-localhost}"
+      port="${sys:logstash.port.number:-9999}" reconnectionDelayMillis="5000">
+      <JsonLayout complete="false" compact="true" eventEol="true"/>
+    </Socket>
+  </Appenders>
+  <Loggers>
+    <Root level="info">
+      <AppenderRef ref="console"/>
+      <AppenderRef ref="socket"/>
+    </Root>
+  </Loggers>
+</Configuration>

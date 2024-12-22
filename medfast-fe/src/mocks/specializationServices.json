@@ -1,0 +1,52 @@
+[
+  {
+    "specialization": "Allergist-Immunologist",
+    "services": [
+      "Allergy Testing",
+      "Immunotherapy",
+      "Asthma Management",
+      "Food Allergy Management",
+      "Drug Allergy Testing",
+      "Skin Prick Testing",
+      "Patch Testing",
+      "Desensitization Treatments"
+    ]
+  },
+  {
+    "specialization": "Endocrinologist",
+    "services": [
+      "Diabetes Management",
+      "Thyroid Function Tests",
+      "Hormone Replacement Therapy",
+      "Osteoporosis Management",
+      "Pituitary Disorders Management",
+      "Insulin Pump Therapy"
+    ]
+  },
+  {
+    "specialization": "Internist",
+    "services": [
+      "Chronic Disease Management",
+      "Routine Physical Examinations",
+      "Diagnostic Testing",
+      "Blood Pressure Management",
+      "Cholesterol Management",
+      "Preventive Care",
+      "Diabetes Care"
+    ]
+  },
+  {
+    "specialization": "Oncologist",
+    "services": [
+      "Chemotherapy",
+      "Radiation Therapy",
+      "Immunotherapy",
+      "Targeted Therapy",
+      "Cancer Screening",
+      "Palliative Care",
+      "Tumor Board Consultations",
+      "Hormone Therapy"
+    ]
+  }
+]
+

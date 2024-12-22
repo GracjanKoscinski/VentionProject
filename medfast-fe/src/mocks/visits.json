@@ -1,0 +1,60 @@
+{
+  "upcomingVisits": [
+    {
+      "id": 1,
+      "doctorSpeciality": "Psychologist",
+      "doctorName": "John",
+      "doctorSurname": "Marks",
+      "date": "Tuesday - Jan 18, 2022 9:00 - 10:00 am",
+      "location": "Beth Moses Hospital 404 Hart Street",
+      "status": "In-consultation"
+    },
+    {
+      "id": 2,
+      "doctorSpeciality": "Anesthesiologist radiologist",
+      "doctorName": "Garry",
+      "doctorSurname": "Webber",
+      "date": "Tuesday - Jan 18, 2022 9:00 - 10:00 am",
+      "location": "Beth Moses Hospital 404 Hart Street",
+      "status": "Scheduled (Confirmed)"
+    },
+    {
+      "id": 3,
+      "doctorSpeciality": "Optometrist",
+      "doctorName": "Mariya",
+      "doctorSurname": "Ivantsova de Florov",
+      "date": "Tuesday - Jan 18, 2022 9:00 - 10:00 am",
+      "location": "Beth Moses Hospital 404 Hart Street",
+      "status": "Scheduled"
+    }
+  ],
+  "pastVisits": [
+    {
+      "id": 1,
+      "doctorSpeciality": "Psychologist",
+      "doctorName": "John",
+      "doctorSurname": "Marks",
+      "date": "Tuesday - Jan 18, 2022 9:00 - 10:00 am",
+      "location": "Beth Moses Hospital 404 Hart Street",
+      "status": "Completed appointment"
+    },
+    {
+      "id": 2,
+      "doctorSpeciality": "Anesthesiologist radiologist",
+      "doctorName": "Garry",
+      "doctorSurname": "Webber",
+      "date": "Tuesday - Jan 18, 2022 9:00 - 10:00 am",
+      "location": "Beth Moses Hospital 404 Hart Street",
+      "status": "Missed appointment"
+    },
+    {
+      "id": 3,
+      "doctorSpeciality": "Optometrist",
+      "doctorName": "Mariya",
+      "doctorSurname": "Ivantsova de Florov",
+      "date": "Tuesday - Jan 18, 2022 9:00 - 10:00 am",
+      "location": "Beth Moses Hospital 404 Hart Street",
+      "status": "Completed appointment"
+    }
+  ]
+}
