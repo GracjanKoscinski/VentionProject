@@ -1,3 +1,4 @@
+
 resource "azurerm_resource_group" "myterraformgroup" {
   name     = var.resource_group_name
   location = var.location
@@ -19,39 +20,10 @@ resource "azurerm_subnet" "myterraformsubnet" {
 
 resource "azurerm_container_registry" "acr" {
   name                = var.acr_name
-  resource_group_name = azurerm_resource_group.myterraformgroup.name
   location            = azurerm_resource_group.myterraformgroup.location
+  resource_group_name = azurerm_resource_group.myterraformgroup.name
   sku                 = "Basic"
   admin_enabled       = true
-}
-
-resource "azurerm_postgresql_flexible_server" "postgres" {
-  name                = "postgres-medfast"
-  resource_group_name = azurerm_resource_group.myterraformgroup.name
-  location            = azurerm_resource_group.myterraformgroup.location
-  version             = "16"
-  
-  administrator_login    = var.db_username
-  administrator_password = var.db_password
-
-  storage_mb = 32768
-  sku_name   = "B_Standard_B1ms"
-
-  backup_retention_days = 7
-}
-
-resource "azurerm_postgresql_flexible_server_database" "medfast" {
-  name      = "medfast"
-  server_id = azurerm_postgresql_flexible_server.postgres.id
-  charset   = "UTF8"
-  collation = "en_US.utf8"
-}
-
-resource "azurerm_postgresql_flexible_server_firewall_rule" "allow_azure_services" {
-  name             = "allow-azure-services"
-  server_id        = azurerm_postgresql_flexible_server.postgres.id
-  start_ip_address = "0.0.0.0"
-  end_ip_address   = "0.0.0.0"
 }
 
 resource "azurerm_kubernetes_cluster" "aks" {
@@ -74,6 +46,61 @@ resource "azurerm_kubernetes_cluster" "aks" {
   }
 }
 
+resource "helm_release" "nginx_ingress" {
+  name             = "nginx-ingress"
+  repository       = "https://kubernetes.github.io/ingress-nginx"
+  chart            = "ingress-nginx"
+  namespace        = "ingress-nginx"
+  create_namespace = true
+  
+  set {
+    name  = "controller.service.type"
+    value = "LoadBalancer"
+  }
+  
+  set {
+    name  = "controller.service.externalTrafficPolicy"
+    value = "Local"
+  }
+  
+  depends_on = [azurerm_kubernetes_cluster.aks]
+}
+
+resource "azurerm_postgresql_flexible_server" "postgres" {
+  name                = "postgres-medfast"
+  resource_group_name = azurerm_resource_group.myterraformgroup.name
+  location            = azurerm_resource_group.myterraformgroup.location
+  version             = "16"
+  
+  administrator_login    = var.db_username
+  administrator_password = var.db_password
+
+  storage_mb = 32768
+  sku_name   = "B_Standard_B1ms"
+
+  backup_retention_days = 7
+}
+
+resource "azurerm_postgresql_flexible_server_configuration" "postgres_extensions" {
+  name      = "azure.extensions"
+  server_id = azurerm_postgresql_flexible_server.postgres.id
+  value     = "pg_trgm"
+}
+
+resource "azurerm_postgresql_flexible_server_database" "medfast" {
+  name      = "medfast"
+  server_id = azurerm_postgresql_flexible_server.postgres.id
+  charset   = "UTF8"
+  collation = "en_US.utf8"
+}
+
+resource "azurerm_postgresql_flexible_server_firewall_rule" "allow_azure_services" {
+  name             = "allow-azure-services"
+  server_id        = azurerm_postgresql_flexible_server.postgres.id
+  start_ip_address = "0.0.0.0"
+  end_ip_address   = "0.0.0.0"
+}
+
 resource "azurerm_role_assignment" "acr_pull" {
   principal_id         = azurerm_kubernetes_cluster.aks.kubelet_identity[0].object_id
   role_definition_name = "AcrPull"
@@ -82,4 +109,12 @@ resource "azurerm_role_assignment" "acr_pull" {
 
 output "postgres_host" {
   value = "${azurerm_postgresql_flexible_server.postgres.name}.postgres.database.azure.com"
+}
+
+output "kubernetes_cluster_name" {
+  value = azurerm_kubernetes_cluster.aks.name
+}
+
+output "acr_login_server" {
+  value = azurerm_container_registry.acr.login_server
 }

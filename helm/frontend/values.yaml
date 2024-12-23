@@ -2,7 +2,7 @@ name: medfast-frontend
 replicaCount: 1
 
 image:
-  repository: medfastcr.azurecr.io/medfast-frontend
+  repository: mytestacrforterraform.azurecr.io/medfast-frontend
   tag: latest
   pullPolicy: Always
 

@@ -1,0 +1,142 @@
+trigger: none
+
+pool: myAgentPool
+
+variables:
+- group: TerraformVariables
+- name: tag
+  value: "$(Build.BuildId)"
+- name: acrName
+  value: "mytestacrforterraform"
+- name: kubernetesNamespace
+  value: "default"
+- name: resource_group_name
+  value: "myTestResourceGroup"
+- name: aks_cluster_name
+  value: "myAKSCluster"
+- name: environment
+  value: "non-prod"
+
+stages:
+- stage: TerraformInfrastructureValidation
+  jobs:
+  - job: TerraformInitAndValidate
+    steps:
+      - task: TerraformInstaller@1
+        inputs:
+          terraformVersion: '1.10.0'
+      - script: |
+          cd terraform
+          terraform init
+          terraform validate
+        displayName: 'Terraform Init and Validate'
+
+- stage: TerraformInfrastructureDeployment
+  dependsOn: TerraformInfrastructureValidation
+  condition: succeeded('TerraformInfrastructureValidation')
+  jobs:
+  - job: TerraformPlanAndApply
+    steps:
+      - task: TerraformInstaller@1
+        inputs:
+          terraformVersion: '1.10.0'
+      - script: |
+          cd terraform
+          terraform init
+          terraform plan -var "subscription_id=$(subscription_id)" -var "client_id=$(client_id)" -var "client_secret=$(client_secret)" -var "tenant_id=$(tenant_id)" -var "db_username=$(db_username)" -var "db_password=$(db_password)" -var-file="$(environment).tfvars"
+          terraform apply -auto-approve -var "subscription_id=$(subscription_id)" -var "client_id=$(client_id)" -var "client_secret=$(client_secret)" -var "tenant_id=$(tenant_id)" -var "db_username=$(db_username)" -var "db_password=$(db_password)" -var-file="$(environment).tfvars"
+        displayName: 'Terraform Plan and Apply'
+
+- stage: BuildImages
+  dependsOn: TerraformInfrastructureDeployment
+  condition: succeeded('TerraformInfrastructureDeployment')
+  jobs:
+  - job: BuildAndPushDockerImages
+    steps:
+      - task: AzureCLI@2
+        inputs:
+          azureSubscription: 'myServiceConnection'
+          scriptType: 'bash'
+          scriptLocation: 'inlineScript'
+          inlineScript: |
+            az acr login --name $(acrName)
+            # Build and push backend
+            cd medfast-be
+            docker build -t $(acrName).azurecr.io/medfast-backend:$(tag) .
+            docker push $(acrName).azurecr.io/medfast-backend:$(tag)
+            # Build and push frontend
+            cd medfast-fe
+            docker build -t $(acrName).azurecr.io/medfast-frontend:$(tag) .
+            docker push $(acrName).azurecr.io/medfast-frontend:$(tag)
+        displayName: 'Build and Push Docker Images'
+
+- stage: Deploy
+  dependsOn: BuildImages
+  condition: succeeded('BuildImages')
+  jobs:
+  - job: DeployBackend
+    steps:
+      - task: KubectlInstaller@0
+        displayName: Install Kubectl
+        inputs:
+          kubectlVersion: 'latest'
+      
+      - task: HelmInstaller@1
+        displayName: Install Helm
+        inputs: 
+          helmVersionToInstall: '3.16.3'
+      
+      - task: HelmDeploy@1
+        displayName: Deploy Backend Helm Chart
+        inputs:
+          connectionType: 'Azure Resource Manager'
+          azureSubscription: 'myServiceConnection'
+          azureResourceGroup: '$(resource_group_name)'
+          kubernetesCluster: '$(aks_cluster_name)'
+          azureSubscriptionForACR: 'myServiceConnection'
+          azureResourceGroupForACR: '$(resource_group_name)'  
+          azureContainerRegistry: '$(acrName)'
+          command: 'upgrade'
+          chartType: FilePath
+          chartPath: './helm/backend'
+          releaseName: medfast-backend
+          install: true
+          arguments: "--force --cleanup-on-fail --debug --atomic"
+          overrideValues: |
+            image.tag=$(tag)
+            config.SPRING_DATASOURCE_USERNAME=$(db_username)
+            config.SPRING_DATASOURCE_PASSWORD=$(db_password)
+            image.repository=$(acrName).azurecr.io/medfast-backend
+
+  # - job: DeployFrontend
+  #   dependsOn: DeployBackend
+  #   steps:
+  #     - task: KubectlInstaller@0
+  #       displayName: Install Kubectl
+  #       inputs:
+  #         kubectlVersion: 'latest'
+      
+  #     - task: HelmInstaller@1
+  #       displayName: Install Helm
+  #       inputs: 
+  #         helmVersionToInstall: '3.16.3'
+      
+  #     - task: HelmDeploy@1
+  #       displayName: Deploy Frontend Helm Chart
+  #       inputs:
+  #         connectionType: 'Azure Resource Manager'
+  #         azureSubscription: 'myServiceConnection'
+  #         azureResourceGroup: '$(resource_group_name)'
+  #         kubernetesCluster: '$(aks_cluster_name)'
+  #         azureSubscriptionForACR: 'myServiceConnection'
+  #         azureResourceGroupForACR: '$(resource_group_name)'  
+  #         azureContainerRegistry: '$(acrName)'
+  #         command: 'upgrade'
+  #         chartType: FilePath
+  #         chartPath: './helm/frontend'
+  #         releaseName: medfast-frontend
+  #         install: true
+  #         arguments: "--force --cleanup-on-fail --debug --atomic"
+  #         overrideValues: |
+  #           image.tag=$(tag)
+  #           image.repository=$(acrName).azurecr.io/medfast-frontend

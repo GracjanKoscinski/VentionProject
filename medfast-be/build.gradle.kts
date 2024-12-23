@@ -46,6 +46,7 @@ dependencies {
     implementation("org.passay:passay:1.6.4")
 
     // DB
+    implementation("com.github.blagerweij:liquibase-sessionlock:1.6.9")
     implementation("org.liquibase:liquibase-core:4.28.0")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     runtimeOnly("org.postgresql:postgresql")
