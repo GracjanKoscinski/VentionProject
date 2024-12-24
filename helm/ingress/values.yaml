@@ -1,0 +1,9 @@
+ingress:
+  className: nginx
+
+services:
+  frontend:
+    name: medfast-frontend-frontend
+  backend:
+    name: medfast-backend-backend
+    port: 8080

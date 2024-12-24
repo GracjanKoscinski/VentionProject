@@ -1,0 +1,32 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: medfast-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  ingressClassName: {{ .Values.ingress.className }}
+  rules:
+    - http:
+        paths:
+        - path: "/api(/|$)(.*)"
+          pathType: Prefix
+          backend:
+            service:
+              name: medfast-backend-backend
+              port:
+                number: 8080
+        - path: "/auth(/|$)(.*)"
+          pathType: Prefix
+          backend:
+            service:
+              name: medfast-backend-backend
+              port:
+                number: 8080
+        - path: "/(.*)"
+          pathType: Prefix
+          backend:
+            service:
+              name: medfast-frontend-frontend
+              port:
+                number: 80

@@ -1,0 +1,4 @@
+apiVersion: v2
+name: medfast-ingress
+description: A Helm chart for Medfast common ingress
+version: 0.1.0

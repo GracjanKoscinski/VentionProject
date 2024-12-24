@@ -64,6 +64,7 @@ stages:
             cd medfast-be
             docker build -t $(acrName).azurecr.io/medfast-backend:$(tag) .
             docker push $(acrName).azurecr.io/medfast-backend:$(tag)
+            cd ..
             # Build and push frontend
             cd medfast-fe
             docker build -t $(acrName).azurecr.io/medfast-frontend:$(tag) .
@@ -108,35 +109,65 @@ stages:
             config.SPRING_DATASOURCE_PASSWORD=$(db_password)
             image.repository=$(acrName).azurecr.io/medfast-backend
 
-  # - job: DeployFrontend
-  #   dependsOn: DeployBackend
-  #   steps:
-  #     - task: KubectlInstaller@0
-  #       displayName: Install Kubectl
-  #       inputs:
-  #         kubectlVersion: 'latest'
+  - job: DeployFrontend
+    dependsOn: DeployBackend
+    steps:
+      - task: KubectlInstaller@0
+        displayName: Install Kubectl
+        inputs:
+          kubectlVersion: 'latest'
       
-  #     - task: HelmInstaller@1
-  #       displayName: Install Helm
-  #       inputs: 
-  #         helmVersionToInstall: '3.16.3'
+      - task: HelmInstaller@1
+        displayName: Install Helm
+        inputs: 
+          helmVersionToInstall: '3.16.3'
       
-  #     - task: HelmDeploy@1
-  #       displayName: Deploy Frontend Helm Chart
-  #       inputs:
-  #         connectionType: 'Azure Resource Manager'
-  #         azureSubscription: 'myServiceConnection'
-  #         azureResourceGroup: '$(resource_group_name)'
-  #         kubernetesCluster: '$(aks_cluster_name)'
-  #         azureSubscriptionForACR: 'myServiceConnection'
-  #         azureResourceGroupForACR: '$(resource_group_name)'  
-  #         azureContainerRegistry: '$(acrName)'
-  #         command: 'upgrade'
-  #         chartType: FilePath
-  #         chartPath: './helm/frontend'
-  #         releaseName: medfast-frontend
-  #         install: true
-  #         arguments: "--force --cleanup-on-fail --debug --atomic"
-  #         overrideValues: |
-  #           image.tag=$(tag)
-  #           image.repository=$(acrName).azurecr.io/medfast-frontend
+      - task: HelmDeploy@1
+        displayName: Deploy Frontend Helm Chart
+        inputs:
+          connectionType: 'Azure Resource Manager'
+          azureSubscription: 'myServiceConnection'
+          azureResourceGroup: '$(resource_group_name)'
+          kubernetesCluster: '$(aks_cluster_name)'
+          azureSubscriptionForACR: 'myServiceConnection'
+          azureResourceGroupForACR: '$(resource_group_name)'  
+          azureContainerRegistry: '$(acrName)'
+          command: 'upgrade'
+          chartType: FilePath
+          chartPath: './helm/frontend'
+          releaseName: medfast-frontend
+          install: true
+          arguments: "--force --cleanup-on-fail --debug --atomic"
+          overrideValues: |
+            image.tag=$(tag)
+            image.repository=$(acrName).azurecr.io/medfast-frontend
+
+  - job: DeployCommonIngress
+    dependsOn: DeployFrontend
+    steps:
+      - task: KubectlInstaller@0
+        displayName: Install Kubectl
+        inputs:
+          kubectlVersion: 'latest'
+      
+      - task: HelmInstaller@1
+        displayName: Install Helm
+        inputs: 
+          helmVersionToInstall: '3.16.3'
+      
+      - task: HelmDeploy@1
+        displayName: Deploy Ingress Helm Chart
+        inputs:
+          connectionType: 'Azure Resource Manager'
+          azureSubscription: 'myServiceConnection'
+          azureResourceGroup: '$(resource_group_name)'
+          kubernetesCluster: '$(aks_cluster_name)'
+          azureSubscriptionForACR: 'myServiceConnection'
+          azureResourceGroupForACR: '$(resource_group_name)'  
+          azureContainerRegistry: '$(acrName)'
+          command: 'upgrade'
+          chartType: FilePath
+          chartPath: './helm/ingress'
+          releaseName: medfast-ingress
+          install: true
+          arguments: "--force --cleanup-on-fail --debug --atomic"
