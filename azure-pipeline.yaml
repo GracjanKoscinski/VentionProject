@@ -7,13 +7,13 @@ variables:
 - name: tag
   value: "$(Build.BuildId)"
 - name: acrName
-  value: "mytestacrforterraform"
+  value: "crformedfast"
 - name: kubernetesNamespace
   value: "default"
 - name: resource_group_name
-  value: "myTestResourceGroup"
+  value: "medfastAppRG"
 - name: aks_cluster_name
-  value: "myAKSCluster"
+  value: "medfastAppAKS"
 - name: environment
   value: "non-prod"
 
